@@ -53,7 +53,7 @@
   }
 
   document.addEventListener('alpine:init', () => {
-    Alpine.data('wordGame', () => ({
+    Alpine.data('WordGame', () => ({
       sentence: '',
       longestWord: '',
       shortestWord: '',
