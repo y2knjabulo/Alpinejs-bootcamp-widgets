@@ -21,14 +21,16 @@ function enoughAirtime(usage, availableAirtime) {
     const airtimeLeft = availableAirtime - totalCost;
     return airtimeLeft >= 0 ? 'R' + airtimeLeft.toFixed(2) : 'R0.00';
   }
-  console.log(enoughAirtime('call,call,call,data,sms,sms,call,data', 50));
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('airtimeCalculator', () => ({
-      usage: '',
-      availableAirtime: 50,
-      airtimeLeft: '',
-      calculateAirtime() {
-        this.airtimeLeft = enoughAirtime(this.usage, this.availableAirtime);
-      }
-    }));
+  
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const calculateButton = document.getElementById('calculateButton');
+    const resultElement = document.getElementById('result');
+
+    calculateButton.addEventListener('click', () => {
+      const usageInput = document.getElementById('usageInput').value;
+      const airtimeInput = parseFloat(document.getElementById('airtimeInput').value);
+      const result = enoughAirtime(usageInput, airtimeInput);
+      resultElement.textContent = `Result: ${result}`;
+    });
   });

@@ -52,16 +52,20 @@
     return sum;
   }
 
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('WordGame', () => ({
-      sentence: '',
+
+  document.addEventListener('DOMContentLoaded', () => {
+    Alpine.data('widget', () => ({
+      resultsVisible: false,
       longestWord: '',
       shortestWord: '',
-      wordLengthsSum: 0,
-      calculateWords() {
-        this.longestWord = longestWord(this.sentence);
-        this.shortestWord = shortestWord(this.sentence);
-        this.wordLengthsSum = wordLengths(this.sentence);
-      }
+      wordLengths: 0,
+
+      analyzeSentence() {
+        const sentence = document.getElementById('sentenceInput').value;
+        this.longestWord = longestWord(sentence);
+        this.shortestWord = shortestWord(sentence);
+        this.wordLengths = wordLengths(sentence);
+        this.resultsVisible = true;
+      },
     }));
   });
